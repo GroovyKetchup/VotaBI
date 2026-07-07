@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src/core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/workbench"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/webPage"/>
+	<classpathentry kind="lib" path="lib/model/dao_model.jar"/>
+	<classpathentry kind="lib" path="lib/platform/ant-1.9.8.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/ant-launcher-1.9.8.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/asm-6.1.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/bcpkix-jdk15on-1.70.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/bcprov-jdk15on-1.70.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/catalogConfig-src-2.1.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/classgraph-4.8.179.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/cmn_jdbc-src-1.1.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/cmn_role-src-1.2.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/cmn_util-core-1.1.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/cmn_util-http-1.1.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/cmn_util_fe-core-1.1.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-beanutils-1.9.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-codec-1.13.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-collections-3.2.1.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-collections4-4.4.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-compress-1.19.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-configuration-1.6.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-csv-1.1.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-daemon-1.0.15.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-dbcp2-2.9.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-fileupload-1.3.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-io-2.4.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-lang-2.6.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-lang3-3.3.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-launcher.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-logging-1.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-math3-3.6.1.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-net-3.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-net-ftp-3.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-pool2-2.10.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/commons-pool2-2.8.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/core-3.5.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/curator-client-4.2.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/curator-framework-4.2.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/curator-recipes-4.2.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/curvesapi-1.06.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/dom4j-1.6.1.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/draw2d_3.7.1.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/easymock-3.6.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/ecj-4.5.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/ezmorph-1.0.6.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_core-core-5.14.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_core-public-5.14.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_core-res-5.14.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_core-studio-5.14.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_core-test-5.14.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_util-pagebuilder-1.8.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/fe_util-src-1.8.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/gdk_core-core-6.5.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/gpfv2_api-core-1.2.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/gpfv2_api-pub-1.2.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/guava-18.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/h2-2.2.222.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/hamcrest-all-1.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/HdrHistogram-2.2.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/httpclient-4.5.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/httpclient-cache-4.5.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/httpcore-4.4.5.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/httpcore-nio-4.4.5.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/httpmime-4.3.5.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/hutool-all-5.8.35.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/IFile-src-1.0.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/javassist-3.20.0-GA.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/javax.servlet-api-3.1.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/JbcBeans.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jcommon-1.0.23.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-http-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-io-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-security-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-server-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-servlet-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-servlets-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-util-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-webapp-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jetty-xml-9.4.48.v20220622.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jfreechart-1.0.19.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/jsch-0.1.51.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/json-lib-2.4-jdk15.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/junit-4.11.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/LatencyUtils-2.0.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/lettuce-core-6.7.0.RELEASE.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/log4j-1.2.17.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/mail-1.4.7.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/micrometer-commons-1.14.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/micrometer-core-1.14.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/micrometer-observation-1.14.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/netty-all-4.2.2.Final.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/pinyin4j-2.5.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/poi-4.1.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/poi-ooxml-4.1.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/poi-ooxml-schemas-4.1.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/postgresql-42.2.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/reactive-streams-1.0.4.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/reactor-core-3.6.6.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/reactor-stream-2.0.8.RELEASE.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/redis-authx-core-0.1.1-beta2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/reflections-0.9.9-RC1-uberjar.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/skin_JTattoo.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/slf4j-api-1.7.36.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/slf4j-log4j12-1.7.7.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/SparseBitSet-1.2.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/spring-core-4.3.29.RELEASE.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tablelayout.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-bap.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-cdao.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-cmn_util.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-dfc.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-gdf.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-gpf.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-lm_sm.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-momgr.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-msi_app.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-msi_cmn.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-SEg.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-srvcommon.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-uiCmn.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-web.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/tcmcat-wfe.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/validation-api-1.0.0.GA.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/xmlbeans-3.1.0.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/xz-1.10.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/yun_dao_model.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/zkclient-0.3.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/platform/zookeeper-3.4.6.jar" sourcepath="openSource/src.zip"/>
+	<classpathentry kind="lib" path="lib/plugin/annotations-13.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/aspose-words-23.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/aviator-5.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/bcprov-jdk15on-1.70.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/catalogConfig-src-2.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_ai_common__common.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_ai_sdk__sdk.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_api2http-http-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_role-src-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_role_fe-res-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_role_fe-resources-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_role_fe-src-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/cmn_udf__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-codec-1.13.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-compress-1.19.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-dbcp2-2.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/commons-pool2-2.10.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/core-3.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/curvesapi-1.06.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fastjson2-2.0.25.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fe_gpt-core-2.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fe_gpt-res-2.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fe_gpt-src-2.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fe_style-core-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fe_style-pagebuilder-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fe_util_defaultAbs-src-1.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fileserver-core-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fileserver-pub-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fileserver-res-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fileserver_fe-core-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fileserver_sdk-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/fontbox-2.0.27.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk-conf-6.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk-resource-6.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk-src-6.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk2gdfPlugin-src-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk_fe-fe-6.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk_fe-res-6.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gdk_fe-resources-6.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-android-aarch64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-android-armv6.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-linux-armv6.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-solaris-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-solaris-i586.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gluegen-rt-main-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpfv2_dcapi-core-1.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpfv2_dcapi_fe-core-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpfv2_dcapi_fe-res-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_basic-core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_basic-example-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_basic-http-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_basic-pub-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_basic-res-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_bloodlineAnalysis-core-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_bloodlineAnalysis-public-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_CodeAgent__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_CodeAgent__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_DataManagement-core-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_DataManagement-public-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_GroupChat_Inst_17694970277525__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT-auto-2.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT-core-2.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT-example-2.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT-public-2.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT-res-2.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT_common-core-1.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_JIT_common-res-1.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_MCPServer-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_MutiAgent__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_MutiAgent__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-core-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-fe-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-modelExecute-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-pub-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-res-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-smbuilder-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-study-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM-viewModel-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2basic__api.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2basic__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2basic__fe.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2basic__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2basic__src.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2basic__study.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2panelx__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2panelx__src.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2workbench__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_octocm2workbench__src.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_CDP__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_DependPackage-core-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_embedPage-core-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_embedPage-res-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_FrontendPackage-core-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_FrontendPackage-res-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_MutiAgentGroupChat__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_VotaClient__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_WebPage__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_WebPage__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_workbench__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_OctoCM_workbench__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_orchestration__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_orchestration__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_orchestration__src.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_ProductionLine__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_ProjectDump__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_rapidView__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_rapidView__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_rda__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_SdkTest__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_TestDev__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_VotaTrack__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_VotaTrack__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_VotaTrack__track.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_zbyth__core.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gpf_dc_zbyth__res.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/gson-2.8.9.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/IFile-src-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ini4j-0.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/itext-asian-5.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/itextpdf-5.5.13.4.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/javaparser-core-3.27.1.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-android-aarch64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-android-armv6.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-linux-armv6.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-solaris-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-solaris-i586.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/jogl-all-main-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/kotlin-stdlib-1.8.21.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/kotlin-stdlib-common-1.9.10.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/kotlin-stdlib-jdk7-1.8.21.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/kotlin-stdlib-jdk8-1.8.21.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/logging-interceptor-3.12.13.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ofdrw-converter-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ofdrw-core-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ofdrw-full-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ofdrw-graphics2d-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ofdrw-pkg-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/okhttp-4.12.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/okio-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/okio-jvm-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/pdfbox-2.0.27.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/poi-ooxml-4.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/poi-ooxml-schemas-4.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/rxjava-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/SlientBapTester-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/SparseBitSet-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/tencentcloud-sdk-java-common-3.1.1281.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/tencentcloud-sdk-java-sms-3.1.1281.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/xz-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/zip4j-2.11.5.jar"/>
+	<classpathentry kind="lib" path="lib/plugin/ZiYuanMicro-core-1.0.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
