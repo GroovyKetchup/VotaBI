@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -136,10 +137,10 @@ public final class DataSourceJdbcUtil {
             if (meta == null) continue;
             String name = meta.getName();
             String typeName = meta.getTypeName();
-            String dataType = mapFieldType(typeName);
+            String dataType = mapFieldType(meta.getType(), typeName);
             Map<String, Object> field = new LinkedHashMap<>();
             field.put(DataSourceConst.FieldConfigKey_DataName, name);
-            field.put(DataSourceConst.FieldConfigKey_Alias, StrUtil.blankToDefault(meta.getLabel(), name));
+            field.put(DataSourceConst.FieldConfigKey_Alias, meta.getLabel());
             field.put(DataSourceConst.FieldConfigKey_DataType, dataType);
             field.put(DataSourceConst.FieldConfigKey_Role,
                     DataSourceConst.DataType_Number.equals(dataType)
@@ -156,6 +157,11 @@ public final class DataSourceJdbcUtil {
     }
 
     public static Map<String, Object> buildQueryListResult(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair) {
+        return buildQueryListResult(pair, pair == null || pair.getRight() == null ? 0 : pair.getRight().size());
+    }
+
+    public static Map<String, Object> buildQueryListResult(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair,
+                                                           int totalSize) {
         List<Map<String, Object>> rows = new ArrayList<>();
         List<JdbcMetaInfoDto> metas = pair == null ? null : pair.getLeft();
         List<List<String>> data = pair == null ? null : pair.getRight();
@@ -176,16 +182,59 @@ public final class DataSourceJdbcUtil {
         }
         Map<String, Object> result = new LinkedHashMap<>();
         result.put(DataSourceConst.ResultKey_List, rows);
-        result.put(DataSourceConst.ResultKey_TotalSize, rows.size());
+        result.put(DataSourceConst.ResultKey_TotalSize, totalSize);
         return result;
+    }
+
+    public static int readCount(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair) {
+        if (pair == null || pair.getRight() == null || pair.getRight().isEmpty()) return 0;
+        List<String> firstRow = pair.getRight().get(0);
+        if (firstRow == null || firstRow.isEmpty() || StrUtil.isBlank(firstRow.get(0))) return 0;
+        return Integer.parseInt(firstRow.get(0));
+    }
+
+    public static String mapFieldType(int sqlType, String typeName) {
+        switch (sqlType) {
+            case Types.BIT:
+            case Types.BOOLEAN:
+                return DataSourceConst.DataType_Boolean;
+            case Types.TINYINT:
+            case Types.SMALLINT:
+            case Types.INTEGER:
+            case Types.BIGINT:
+            case Types.FLOAT:
+            case Types.REAL:
+            case Types.DOUBLE:
+            case Types.NUMERIC:
+            case Types.DECIMAL:
+                return DataSourceConst.DataType_Number;
+            case Types.DATE:
+            case Types.TIME:
+            case Types.TIME_WITH_TIMEZONE:
+            case Types.TIMESTAMP:
+            case Types.TIMESTAMP_WITH_TIMEZONE:
+                return DataSourceConst.DataType_Date;
+            case Types.CHAR:
+            case Types.NCHAR:
+            case Types.VARCHAR:
+            case Types.NVARCHAR:
+            case Types.LONGVARCHAR:
+            case Types.LONGNVARCHAR:
+            case Types.CLOB:
+            case Types.NCLOB:
+                return DataSourceConst.DataType_String;
+            default:
+                return mapFieldType(typeName);
+        }
     }
 
     public static String mapFieldType(String typeName) {
         String type = StrUtil.blankToDefault(typeName, "").toUpperCase(Locale.ROOT);
         if (type.contains("BOOL")) return DataSourceConst.DataType_Boolean;
         if (type.contains("DATE") || type.contains("TIME")) return DataSourceConst.DataType_Date;
-        if (type.contains("INT") || type.contains("DECIMAL") || type.contains("NUMBER")
-                || type.contains("DOUBLE") || type.contains("FLOAT")) {
+        if (type.contains("INT") || type.contains("DECIMAL") || type.contains("NUMERIC")
+                || type.contains("NUMBER") || type.contains("DOUBLE") || type.contains("FLOAT")
+                || type.contains("REAL") || type.contains("MONEY")) {
             return DataSourceConst.DataType_Number;
         }
         return DataSourceConst.DataType_String;
