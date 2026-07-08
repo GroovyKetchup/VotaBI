@@ -85,6 +85,16 @@ public final class ReportQueryHelper {
         return new SqlStatementDto(statement).setParamMap(paramMap);
     }
 
+    public static SqlStatementDto buildCountSqlStatement(String sqlTemplate, Map<String, Object> params) {
+        if (StrUtil.isBlank(sqlTemplate)) {
+            throw new IllegalArgumentException("SQL 模板不能为空");
+        }
+        Map<String, Object> paramMap = (params == null) ? new HashMap<>() : new HashMap<>(params);
+        validateSqlParams(sqlTemplate, paramMap);
+        String statement = "SELECT COUNT(*) FROM (" + stripTrailingSemicolon(sqlTemplate) + ") _votabi_count";
+        return new SqlStatementDto(statement).setParamMap(paramMap);
+    }
+
     public static Set<String> extractSqlParamNames(String querySql) {
         if (StrUtil.isBlank(querySql)) return new LinkedHashSet<>();
         rejectUnsupportedSqlPlaceholders(querySql);

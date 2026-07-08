@@ -230,10 +230,15 @@ public interface ReportDesignerExpr extends CellIntf {
 
             pageNo = defaultPageNo(pageNo);
             pageSize = defaultPageSize(pageSize);
+            SqlStatementDto countStmt = ReportQueryHelper.buildCountSqlStatement(querySql, sqlParams);
+            PairDto<List<JdbcMetaInfoDto>, List<List<String>>> countPair =
+                    IJDBCService.get().queryDataWithStatement(ds, countStmt);
+            int totalSize = DataSourceJdbcUtil.readCount(countPair);
+
             SqlStatementDto stmt = ReportQueryHelper.buildSqlStatement(querySql, sqlParams, pageNo, pageSize);
             PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair =
                     IJDBCService.get().queryDataWithStatement(ds, stmt);
-            return DataSourceJdbcUtil.buildQueryListResult(pair);
+            return DataSourceJdbcUtil.buildQueryListResult(pair, totalSize);
         }
     }
 
