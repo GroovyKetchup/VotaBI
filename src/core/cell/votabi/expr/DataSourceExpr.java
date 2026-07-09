@@ -75,7 +75,7 @@ public interface DataSourceExpr extends CellIntf {
     default Map<String, Object> getSourceTableFields(String domain, String databasePanelCode, String databaseId,
                                                      String schemaName, String sourceTableName) throws Exception {
         ReportJdbcDataSource ds = loadDataSource(domain, databasePanelCode, databaseId);
-        String querySql = DataSourceJdbcUtil.buildSourceTableSql(schemaName, sourceTableName);
+        String querySql = ReportQueryHelper.buildSourceTableSql(schemaName, sourceTableName, ds.getDBType());
         return queryFields(ds, querySql, null);
     }
 
@@ -109,7 +109,7 @@ public interface DataSourceExpr extends CellIntf {
     }
 
     default Map<String, Object> queryFields(ReportJdbcDataSource ds, String querySql, Map<String, Object> params) throws Exception {
-        SqlStatementDto stmt = ReportQueryHelper.buildSqlStatement(querySql, params, 1, 1);
+        SqlStatementDto stmt = ReportQueryHelper.buildProbeSqlStatement(querySql, params, ds.getDBType());
         PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair =
                 IJDBCService.get().queryDataWithStatement(ds, stmt);
         return DataSourceJdbcUtil.buildFieldResult(pair == null ? null : pair.getLeft());

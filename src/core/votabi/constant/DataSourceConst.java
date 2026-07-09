@@ -39,5 +39,6 @@ public final class DataSourceConst {
 
     public static final String Role_Dimension = "dimension";
     public static final String Role_Measure = "measure";
+    public static final String Role_Attribute = "attribute";
     public static final String DefaultDateFormat = "yyyyMMdd";
 }

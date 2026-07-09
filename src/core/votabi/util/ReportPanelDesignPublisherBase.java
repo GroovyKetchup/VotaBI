@@ -4,7 +4,6 @@ import cell.cdao.IDao;
 import cell.gpf.adur.data.IFormMgr;
 import cell.octo.cm.service.IPanelDesignService;
 import cmn.anotation.ClassDeclare;
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -473,85 +472,6 @@ public abstract class ReportPanelDesignPublisherBase {
             defaultCreateBtnForm = PanelDesignCommonFormUtil.getOrCreateDefaultCreateButton(dao, observer, panel);
         }
         return defaultCreateBtnForm;
-    }
-
-    /**
-     * 每次发布都完整重建[面板表格] + [面板表单] + [页面入口] + [面板事件](行点击)，Publisher 是唯一数据源。
-     *
-     * <p>命名/字段填充策略参考 {@code CPanelDesignService.initPanelDesignViewOrchestrationTable/Form}：
-     * <ul>
-     *   <li>表格名称 = 面板名称（去除特殊字符）</li>
-     *   <li>表单名称 = {@code PanelDesignCommonFormUtil.buildPanelFormName(panelName)}</li>
-     *   <li>列名/属性 = 面板数据子表里的全部“场景属性名称”</li>
-     *   <li>表格菜单 = 面板按钮里名称包含 "刷新" / "&lt;面板名&gt;_新增" / "删除" 的</li>
-     *   <li>表格操作列 = 面板按钮里名称包含 "删除" 的</li>
-     *   <li>表单按钮 = 面板按钮里名称包含 "保存" / "取消" 的</li>
-     *   <li>行点击 = 复用 {@code PanelDesignCommonFormUtil.createDefaultTableRowClickEvent}</li>
-     *   <li>页面入口 = 表格名称</li>
-     * </ul>
-     */
-    protected void buildDefaultViews() throws Exception {
-        String panelName = panel.getString("面板名称");
-        if (StrUtil.isBlank(panelName)) return;
-
-        // 列字段名串：从面板数据子表抽取场景属性名称
-        String columnNamesStr = joinSceneAttrNames(panel.getTable("面板数据"));
-
-        // 默认行点击事件（弹出编辑表单）
-        Form rowClickEvent = PanelDesignCommonFormUtil.createDefaultTableRowClickEvent(dao, observer, panel);
-        AssociationData rowClickEventAc = rowClickEvent != null ? Op.toAssociationData(rowClickEvent) : null;
-
-        // ----- 默认表格 -----
-        String tableName = removeSpecialChar(panelName);
-        TableData tableTd = new TableData(SlaveFormModelId_PanelDesign_View_Orchestration_Table);
-        Form tableRow = Op.newForm(tableTd.getFormModelId());
-        tableRow.setAttrValue("表格名称", tableName);
-        tableRow.setAttrValue("列名", columnNamesStr);
-
-        TableData panelBtnTd = panel.getTable("面板按钮");
-        Set<String> menuKeywords = new HashSet<>();
-        menuKeywords.add("刷新");
-        menuKeywords.add(StrUtil.format("{}_新增", panelName));
-        menuKeywords.add("删除");
-        List<String> menuBtnNames = pickButtonNamesByKeyword(panelBtnTd, menuKeywords);
-
-        Set<String> rowOpKeywords = new HashSet<>();
-        rowOpKeywords.add("删除");
-        List<String> rowBtnNames = pickButtonNamesByKeyword(panelBtnTd, rowOpKeywords);
-
-        if (!menuBtnNames.isEmpty()) {
-            tableRow.setAttrValue("菜单", CollUtil.join(menuBtnNames, ","));
-        }
-        tableRow.setAttrValue("操作列", CollUtil.join(rowBtnNames, ","));
-
-        if (rowClickEventAc != null) {
-            tableRow.setAttrValue("事件集合", CollUtil.newArrayList(rowClickEventAc));
-
-            TableData eventTd = new TableData(SlaveFormModelId_PanelDesign_Constraint_Event);
-            Form eventRow = Op.newForm(eventTd.getFormModelId());
-            eventRow.setAttrValue("事件实现", rowClickEventAc);
-            eventTd.add(eventRow);
-            panel.setAttrValue("面板事件", eventTd);
-        }
-        tableTd.add(tableRow);
-        panel.setAttrValue("面板表格", tableTd);
-
-        // ----- 默认表单 -----
-        TableData formTd = new TableData(SlaveFormModelId_PanelDesign_View_Orchestration_Form);
-        Form formRow = Op.newForm(formTd.getFormModelId());
-        formRow.setAttrValue("表单名称", PanelDesignCommonFormUtil.buildPanelFormName(panelName));
-        formRow.setAttrValue("属性", columnNamesStr);
-        formRow.setAttrValue("重置布局", true);
-
-        Set<String> formBtnKeywords = new HashSet<>();
-        formBtnKeywords.add("*");
-        List<String> formBtnNames = pickButtonNamesByKeyword(panelBtnTd, formBtnKeywords);
-        formRow.setAttrValue("按钮", CollUtil.join(formBtnNames, ","));
-        formTd.add(formRow);
-        panel.setAttrValue("面板表单", formTd);
-
-        // ----- 页面入口 -----
-        panel.setAttrValue("页面入口", tableName);
     }
 
     /**

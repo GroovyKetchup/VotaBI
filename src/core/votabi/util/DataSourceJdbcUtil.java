@@ -142,10 +142,7 @@ public final class DataSourceJdbcUtil {
             field.put(DataSourceConst.FieldConfigKey_DataName, name);
             field.put(DataSourceConst.FieldConfigKey_Alias, meta.getLabel());
             field.put(DataSourceConst.FieldConfigKey_DataType, dataType);
-            field.put(DataSourceConst.FieldConfigKey_Role,
-                    DataSourceConst.DataType_Number.equals(dataType)
-                            ? DataSourceConst.Role_Measure
-                            : DataSourceConst.Role_Dimension);
+            field.put(DataSourceConst.FieldConfigKey_Role, inferRole(dataType));
             field.put(DataSourceConst.FieldConfigKey_DateFormat,
                     DataSourceConst.DataType_Date.equals(dataType) ? DataSourceConst.DefaultDateFormat : "");
             field.put(DataSourceConst.FieldConfigKey_Primary, false);
@@ -154,6 +151,12 @@ public final class DataSourceJdbcUtil {
             fields.add(field);
         }
         return fields;
+    }
+
+    private static String inferRole(String dataType) {
+        if (DataSourceConst.DataType_Number.equals(dataType)) return DataSourceConst.Role_Measure;
+        if (DataSourceConst.DataType_Boolean.equals(dataType)) return DataSourceConst.Role_Attribute;
+        return DataSourceConst.Role_Dimension;
     }
 
     public static Map<String, Object> buildQueryListResult(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair) {
