@@ -28,6 +28,8 @@ public class ReportQueryHelperTest {
         fieldProbeOutputsSourceTypeLengthAndPrecision();
         dateFilterKeepsNumberWhenSourceTypeIsNumber();
         dateFilterConvertsTimestampWhenSourceTypeIsDate();
+        numberResultReturnsBigDecimal();
+        booleanResultReturnsBoolean();
         dateNumberResultReturnsTimestampLong();
         rejectsUnknownConsumerField();
         rejectsUnknownDatabaseType();
@@ -284,6 +286,20 @@ public class ReportQueryHelperTest {
         assertEquals(1720000000000L, value);
     }
 
+    private static void numberResultReturnsBigDecimal() {
+        Object value = firstConvertedValue("amount", "123.45", DataSourceConst.DataType_Number, null);
+
+        assertEquals(true, value instanceof BigDecimal);
+        assertEquals(new BigDecimal("123.45"), value);
+    }
+
+    private static void booleanResultReturnsBoolean() {
+        Object value = firstConvertedValue("enabled", "1", DataSourceConst.DataType_Boolean, null);
+
+        assertEquals(true, value instanceof Boolean);
+        assertEquals(true, value);
+    }
+
     private static void rejectsUnknownConsumerField() {
         Map<String, Object> condition = new LinkedHashMap<>();
         condition.put("bad_field", "x");
@@ -358,6 +374,27 @@ public class ReportQueryHelperTest {
         field.put(DataSourceConst.FieldConfigKey_SourceType, sourceType);
         fields.add(field);
         return fields;
+    }
+
+    private static Object firstConvertedValue(String fieldName, String rawValue, String dataType, String sourceType) {
+        JdbcMetaInfoDto meta = new JdbcMetaInfoDto();
+        meta.setName(fieldName);
+        List<JdbcMetaInfoDto> metas = new ArrayList<>();
+        metas.add(meta);
+        List<List<String>> data = new ArrayList<>();
+        List<String> row = new ArrayList<>();
+        row.add(rawValue);
+        data.add(row);
+        List<Map<String, Object>> fields = new ArrayList<>();
+        Map<String, Object> field = new LinkedHashMap<>();
+        field.put(DataSourceConst.FieldConfigKey_DataName, fieldName);
+        field.put(DataSourceConst.FieldConfigKey_DataType, dataType);
+        if (sourceType != null) field.put(DataSourceConst.FieldConfigKey_SourceType, sourceType);
+        fields.add(field);
+
+        Map<String, Object> result = DataSourceJdbcUtil.buildQueryListResult(PairDto.of(metas, data), 1, fields);
+        List<?> rows = (List<?>) result.get(DataSourceConst.ResultKey_List);
+        return ((Map<?, ?>) rows.get(0)).get(fieldName);
     }
 
     private static void assertEquals(Object expected, Object actual) {

@@ -222,6 +222,22 @@ public final class DataSourceJdbcUtil {
         if (value == null || fieldConfig == null) return value;
         String dataType = String.valueOf(fieldConfig.get(DataSourceConst.FieldConfigKey_DataType));
         String sourceType = String.valueOf(fieldConfig.get(DataSourceConst.FieldConfigKey_SourceType));
+        if (DataSourceConst.DataType_Number.equals(dataType)) {
+            // 数值语义字段返回真实数字；脏值转 null，避免前端 SQL 聚合被字符串值污染。
+            try {
+                String text = String.valueOf(value).trim();
+                return StrUtil.isBlank(text) ? null : new BigDecimal(text);
+            } catch (Exception ignored) {
+                return null;
+            }
+        }
+        if (DataSourceConst.DataType_Boolean.equals(dataType)) {
+            String text = String.valueOf(value).trim().toLowerCase(Locale.ROOT);
+            if (StrUtil.isBlank(text)) return null;
+            if ("true".equals(text) || "1".equals(text)) return true;
+            if ("false".equals(text) || "0".equals(text)) return false;
+            return null;
+        }
         if (DataSourceConst.DataType_Date.equals(dataType) && DataSourceConst.DataType_Number.equals(sourceType)) {
             // 数值存储、日期语义的字段返回毫秒时间戳数字，方便前端直接 new Date(value)。
             try {
