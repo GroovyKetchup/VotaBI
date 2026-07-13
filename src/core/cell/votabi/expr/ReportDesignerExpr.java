@@ -167,10 +167,11 @@ public interface ReportDesignerExpr extends CellIntf {
                 throw new RuntimeException("数据集[" + datasetId + "]数据集类型不支持：" + datasetType);
             }
 
+            List<Map<String, Object>> fieldConfigs = parseFieldConfigs(dataset.getString(DataSourceConst.FieldName_FieldConfig));
             ReportQueryHelper.QueryPlan plan = ReportQueryHelper.buildConsumerQueryPlan(
                     querySql,
                     sqlParams,
-                    parseFieldConfigs(dataset.getString(DataSourceConst.FieldName_FieldConfig)),
+                    fieldConfigs,
                     keyword,
                     condition,
                     advancedConditions,
@@ -184,7 +185,7 @@ public interface ReportDesignerExpr extends CellIntf {
             int totalSize = DataSourceJdbcUtil.readCount(countPair);
             PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair =
                     IJDBCService.get().queryDataWithStatement(ds, plan.getPageStatement());
-            return DataSourceJdbcUtil.buildQueryListResult(pair, totalSize);
+            return DataSourceJdbcUtil.buildQueryListResult(pair, totalSize, fieldConfigs);
         }
     }
 

@@ -15,6 +15,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -137,14 +138,17 @@ public final class DataSourceJdbcUtil {
             if (meta == null) continue;
             String name = meta.getName();
             String typeName = meta.getTypeName();
-            String dataType = mapFieldType(meta.getType(), typeName);
+            String sourceType = mapFieldType(meta.getType(), typeName);
             Map<String, Object> field = new LinkedHashMap<>();
             field.put(DataSourceConst.FieldConfigKey_DataName, name);
             field.put(DataSourceConst.FieldConfigKey_Alias, meta.getLabel());
-            field.put(DataSourceConst.FieldConfigKey_DataType, dataType);
-            field.put(DataSourceConst.FieldConfigKey_Role, inferRole(dataType));
+            field.put(DataSourceConst.FieldConfigKey_SourceType, sourceType);
+            field.put(DataSourceConst.FieldConfigKey_DataType, sourceType);
+            field.put(DataSourceConst.FieldConfigKey_Length, meta.getDisplaySize());
+            field.put(DataSourceConst.FieldConfigKey_Precision, meta.getPrecision());
+            field.put(DataSourceConst.FieldConfigKey_Role, inferRole(sourceType));
             field.put(DataSourceConst.FieldConfigKey_DateFormat,
-                    DataSourceConst.DataType_Date.equals(dataType) ? DataSourceConst.DefaultDateFormat : "");
+                    DataSourceConst.DataType_Date.equals(sourceType) ? DataSourceConst.DefaultDateFormat : "");
             field.put(DataSourceConst.FieldConfigKey_Primary, false);
             field.put(DataSourceConst.FieldConfigKey_Sort, "");
             field.put(DataSourceConst.FieldConfigKey_Category, "");
@@ -165,9 +169,16 @@ public final class DataSourceJdbcUtil {
 
     public static Map<String, Object> buildQueryListResult(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair,
                                                            int totalSize) {
+        return buildQueryListResult(pair, totalSize, null);
+    }
+
+    public static Map<String, Object> buildQueryListResult(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair,
+                                                           int totalSize,
+                                                           List<Map<String, Object>> fieldConfigs) {
         List<Map<String, Object>> rows = new ArrayList<>();
         List<JdbcMetaInfoDto> metas = pair == null ? null : pair.getLeft();
         List<List<String>> data = pair == null ? null : pair.getRight();
+        Map<String, Map<String, Object>> fieldConfigMap = buildFieldConfigMap(fieldConfigs);
         List<String> columnNames = new ArrayList<>();
         if (metas != null) {
             for (JdbcMetaInfoDto meta : metas) {
@@ -178,7 +189,9 @@ public final class DataSourceJdbcUtil {
             for (List<String> dataRow : data) {
                 Map<String, Object> row = new LinkedHashMap<>();
                 for (int i = 0; i < columnNames.size(); i++) {
-                    row.put(columnNames.get(i), dataRow != null && i < dataRow.size() ? dataRow.get(i) : null);
+                    String columnName = columnNames.get(i);
+                    Object value = dataRow != null && i < dataRow.size() ? dataRow.get(i) : null;
+                    row.put(columnName, convertResultValue(value, fieldConfigMap.get(columnName)));
                 }
                 rows.add(row);
             }
@@ -187,6 +200,38 @@ public final class DataSourceJdbcUtil {
         result.put(DataSourceConst.ResultKey_List, rows);
         result.put(DataSourceConst.ResultKey_TotalSize, totalSize);
         return result;
+    }
+
+    private static Map<String, Map<String, Object>> buildFieldConfigMap(List<Map<String, Object>> fieldConfigs) {
+        Map<String, Map<String, Object>> map = new LinkedHashMap<>();
+        if (fieldConfigs == null) return map;
+        for (Map<String, Object> field : fieldConfigs) {
+            if (field == null) continue;
+            putFieldConfig(map, field.get(DataSourceConst.FieldConfigKey_DataName), field);
+            putFieldConfig(map, field.get(DataSourceConst.FieldConfigKey_Alias), field);
+        }
+        return map;
+    }
+
+    private static void putFieldConfig(Map<String, Map<String, Object>> map, Object key, Map<String, Object> field) {
+        String name = key == null ? null : String.valueOf(key);
+        if (StrUtil.isNotBlank(name)) map.put(name, field);
+    }
+
+    private static Object convertResultValue(Object value, Map<String, Object> fieldConfig) {
+        if (value == null || fieldConfig == null) return value;
+        String dataType = String.valueOf(fieldConfig.get(DataSourceConst.FieldConfigKey_DataType));
+        String sourceType = String.valueOf(fieldConfig.get(DataSourceConst.FieldConfigKey_SourceType));
+        if (DataSourceConst.DataType_Date.equals(dataType) && DataSourceConst.DataType_Number.equals(sourceType)) {
+            // 数值存储、日期语义的字段返回毫秒时间戳数字，方便前端直接 new Date(value)。
+            try {
+                String text = String.valueOf(value).trim();
+                return StrUtil.isBlank(text) ? null : new BigDecimal(text).longValue();
+            } catch (Exception ignored) {
+                return value;
+            }
+        }
+        return value;
     }
 
     public static int readCount(PairDto<List<JdbcMetaInfoDto>, List<List<String>>> pair) {

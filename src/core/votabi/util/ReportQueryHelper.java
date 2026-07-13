@@ -327,9 +327,10 @@ public final class ReportQueryHelper {
             String dataName = stringValue(field.get(DataSourceConst.FieldConfigKey_DataName));
             String alias = stringValue(field.get(DataSourceConst.FieldConfigKey_Alias));
             String dataType = stringValue(field.get(DataSourceConst.FieldConfigKey_DataType));
+            String sourceType = stringValue(field.get(DataSourceConst.FieldConfigKey_SourceType));
             String dateFormat = stringValue(field.get(DataSourceConst.FieldConfigKey_DateFormat));
             if (StrUtil.isNotBlank(dataName)) {
-                FieldRef ref = new FieldRef(dataName, dataType, dateFormat);
+                FieldRef ref = new FieldRef(dataName, dataType, sourceType, dateFormat);
                 fields.put(dataName, ref);
                 if (StrUtil.isNotBlank(alias)) fields.put(alias, ref);
             }
@@ -385,17 +386,37 @@ public final class ReportQueryHelper {
             if ("false".equals(text) || "0".equals(text)) return false;
             throw new RuntimeException("Query field [" + field.name + "] requires boolean: " + value);
         }
-        if (DataSourceConst.DataType_Date.equals(field.dataType) && value instanceof String) {
-            String text = ((String) value).trim();
-            if (StrUtil.isBlank(text)) throw new RuntimeException("Query field [" + field.name + "] requires date");
-            try {
-                String pattern = StrUtil.blankToDefault(field.dateFormat, DataSourceConst.DefaultDateFormat);
-                return new Timestamp(new SimpleDateFormat(pattern).parse(text).getTime());
-            } catch (Exception e) {
-                throw new RuntimeException("Query field [" + field.name + "] requires date: " + value);
+        if (DataSourceConst.DataType_Date.equals(field.dataType)) {
+            if (DataSourceConst.DataType_Number.equals(field.sourceType)) return convertNumber(field, value);
+            if (DataSourceConst.DataType_Date.equals(field.sourceType) && value instanceof Number) {
+                return new Timestamp(((Number) value).longValue());
+            }
+            if (value instanceof String) {
+                String text = ((String) value).trim();
+                if (StrUtil.isBlank(text)) throw new RuntimeException("Query field [" + field.name + "] requires date");
+                try {
+                    if (DataSourceConst.DataType_Date.equals(field.sourceType) && text.matches("\\d+")) {
+                        return new Timestamp(Long.parseLong(text));
+                    }
+                    String pattern = StrUtil.blankToDefault(field.dateFormat, DataSourceConst.DefaultDateFormat);
+                    return new Timestamp(new SimpleDateFormat(pattern).parse(text).getTime());
+                } catch (Exception e) {
+                    throw new RuntimeException("Query field [" + field.name + "] requires date: " + value);
+                }
             }
         }
         return value;
+    }
+
+    private static Object convertNumber(FieldRef field, Object value) {
+        if (value instanceof Number) return value;
+        String text = stringValue(value).trim();
+        if (StrUtil.isBlank(text)) throw new RuntimeException("Query field [" + field.name + "] requires number");
+        try {
+            return new BigDecimal(text);
+        } catch (Exception e) {
+            throw new RuntimeException("Query field [" + field.name + "] requires number: " + value);
+        }
     }
 
     private static BigDecimal parseKeywordNumber(String keyword) {
@@ -490,11 +511,13 @@ public final class ReportQueryHelper {
     private static final class FieldRef {
         private final String name;
         private final String dataType;
+        private final String sourceType;
         private final String dateFormat;
 
-        private FieldRef(String name, String dataType, String dateFormat) {
+        private FieldRef(String name, String dataType, String sourceType, String dateFormat) {
             this.name = name;
             this.dataType = dataType;
+            this.sourceType = sourceType;
             this.dateFormat = dateFormat;
         }
     }

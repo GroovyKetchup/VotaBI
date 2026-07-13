@@ -25,7 +25,10 @@ public final class DataSourceConst {
 
     public static final String FieldConfigKey_DataName = "dataName";
     public static final String FieldConfigKey_Alias = "alias";
+    public static final String FieldConfigKey_SourceType = "sourceType";
     public static final String FieldConfigKey_DataType = "dataType";
+    public static final String FieldConfigKey_Length = "length";
+    public static final String FieldConfigKey_Precision = "precision";
     public static final String FieldConfigKey_Role = "role";
     public static final String FieldConfigKey_DateFormat = "dateFormat";
     public static final String FieldConfigKey_Primary = "primary";

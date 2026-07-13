@@ -1,11 +1,13 @@
 package votabi.util;
 
 import ai.webPage.dto.OrderByItem;
+import cmn.dto.PairDto;
 import cmn.enums.sql.DBTypeEnum;
 import cmn.dto.sql.dql.JdbcMetaInfoDto;
 import votabi.constant.DataSourceConst;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -23,6 +25,10 @@ public class ReportQueryHelperTest {
         sqlServerUsesStableDefaultOrder();
         sqlServerProbeUsesTopOne();
         booleanFieldDefaultsToAttributeRole();
+        fieldProbeOutputsSourceTypeLengthAndPrecision();
+        dateFilterKeepsNumberWhenSourceTypeIsNumber();
+        dateFilterConvertsTimestampWhenSourceTypeIsDate();
+        dateNumberResultReturnsTimestampLong();
         rejectsUnknownConsumerField();
         rejectsUnknownDatabaseType();
     }
@@ -196,6 +202,88 @@ public class ReportQueryHelperTest {
         assertEquals(DataSourceConst.Role_Attribute, fields.get(0).get(DataSourceConst.FieldConfigKey_Role));
     }
 
+    private static void fieldProbeOutputsSourceTypeLengthAndPrecision() {
+        JdbcMetaInfoDto meta = new JdbcMetaInfoDto();
+        meta.setName("amount");
+        meta.setLabel("amount");
+        meta.setType(Types.NUMERIC);
+        meta.setTypeName("numeric");
+        meta.setDisplaySize(21);
+        meta.setPrecision(20);
+        List<JdbcMetaInfoDto> metas = new ArrayList<>();
+        metas.add(meta);
+
+        Map<String, Object> field = DataSourceJdbcUtil.buildFieldList(metas).get(0);
+
+        assertEquals(DataSourceConst.DataType_Number, field.get(DataSourceConst.FieldConfigKey_SourceType));
+        assertEquals(DataSourceConst.DataType_Number, field.get(DataSourceConst.FieldConfigKey_DataType));
+        assertEquals(21, field.get(DataSourceConst.FieldConfigKey_Length));
+        assertEquals(20, field.get(DataSourceConst.FieldConfigKey_Precision));
+    }
+
+    private static void dateFilterKeepsNumberWhenSourceTypeIsNumber() {
+        Map<String, Object> condition = new LinkedHashMap<>();
+        condition.put("created_at", "1720000000000");
+
+        ReportQueryHelper.QueryPlan plan = ReportQueryHelper.buildConsumerQueryPlan(
+                "SELECT created_at FROM orders",
+                new LinkedHashMap<>(),
+                dateFieldConfig(DataSourceConst.DataType_Number),
+                null,
+                condition,
+                null,
+                null,
+                DBTypeEnum.MySQL,
+                1,
+                10
+        );
+
+        assertEquals(new BigDecimal("1720000000000"), plan.getPageStatement().getParamMap().get("__filter_0"));
+    }
+
+    private static void dateFilterConvertsTimestampWhenSourceTypeIsDate() {
+        Map<String, Object> condition = new LinkedHashMap<>();
+        condition.put("created_at", 1720000000000L);
+
+        ReportQueryHelper.QueryPlan plan = ReportQueryHelper.buildConsumerQueryPlan(
+                "SELECT created_at FROM orders",
+                new LinkedHashMap<>(),
+                dateFieldConfig(DataSourceConst.DataType_Date),
+                null,
+                condition,
+                null,
+                null,
+                DBTypeEnum.MySQL,
+                1,
+                10
+        );
+
+        Object value = plan.getPageStatement().getParamMap().get("__filter_0");
+        assertEquals(true, value instanceof Timestamp);
+        assertEquals(1720000000000L, ((Timestamp) value).getTime());
+    }
+
+    private static void dateNumberResultReturnsTimestampLong() {
+        JdbcMetaInfoDto meta = new JdbcMetaInfoDto();
+        meta.setName("created_at");
+        List<JdbcMetaInfoDto> metas = new ArrayList<>();
+        metas.add(meta);
+        List<List<String>> data = new ArrayList<>();
+        List<String> row = new ArrayList<>();
+        row.add("1720000000000");
+        data.add(row);
+
+        Map<String, Object> result = DataSourceJdbcUtil.buildQueryListResult(
+                PairDto.of(metas, data),
+                1,
+                dateFieldConfig(DataSourceConst.DataType_Number));
+        List<?> rows = (List<?>) result.get(DataSourceConst.ResultKey_List);
+        Object value = ((Map<?, ?>) rows.get(0)).get("created_at");
+
+        assertEquals(true, value instanceof Long);
+        assertEquals(1720000000000L, value);
+    }
+
     private static void rejectsUnknownConsumerField() {
         Map<String, Object> condition = new LinkedHashMap<>();
         condition.put("bad_field", "x");
@@ -259,6 +347,16 @@ public class ReportQueryHelperTest {
         name.put(DataSourceConst.FieldConfigKey_Alias, "客户名称");
         name.put(DataSourceConst.FieldConfigKey_DataType, DataSourceConst.DataType_String);
         fields.add(name);
+        return fields;
+    }
+
+    private static List<Map<String, Object>> dateFieldConfig(String sourceType) {
+        List<Map<String, Object>> fields = new ArrayList<>();
+        Map<String, Object> field = new LinkedHashMap<>();
+        field.put(DataSourceConst.FieldConfigKey_DataName, "created_at");
+        field.put(DataSourceConst.FieldConfigKey_DataType, DataSourceConst.DataType_Date);
+        field.put(DataSourceConst.FieldConfigKey_SourceType, sourceType);
+        fields.add(field);
         return fields;
     }
 
